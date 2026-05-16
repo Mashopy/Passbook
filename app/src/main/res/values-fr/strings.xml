@@ -1,0 +1,43 @@
+<resources>
+    <string name="about">À propos</string>
+    <string name="version">Version 1.0</string>
+    <string name="app_description">Convertit les PDF de billets de train SNCF en fichiers\n.pkpass pour Walt et Apple Wallet.</string>
+    <string name="built_with">Compilé avec</string>
+
+    <!-- Pass list -->
+    <string name="empty_state">Pas encore de pass.\nAppuyez sur + pour importer un billet de train au format PDF.</string>
+    <string name="import_pdf">Importer un PDF</string>
+    <string name="delete_pass">Supprimer le pass</string>
+
+    <!-- Pass detail -->
+    <string name="ticket">Billet</string>
+    <string name="ticket_barcode">Code-barre du billet</string>
+    <string name="export_pkpass">Exporter le .pkpass</string>
+    <string name="saved_to_downloads">Enregistré dans Downloads</string>
+    <string name="export_failed">L\'exporation à échoué</string>
+    <string name="share">Partager</string>
+
+    <!-- Pass fields -->
+    <string name="field_from">DE</string>
+    <string name="field_to">À</string>
+    <string name="field_departure">DÉPART</string>
+    <string name="field_arrival">ARRIVÉE</string>
+    <string name="field_passenger">PASSAGER</string>
+    <string name="field_train">TRAIN</string>
+    <string name="field_date">DATE</string>
+    <string name="field_seat">PLACE</string>
+    <string name="field_ref">DOSSIER</string>
+    <string name="field_price">PRIX</string>
+
+    <!-- Libraries -->
+    <string name="lib_compose" translatable="false">Jetpack Compose</string>
+    <string name="lib_compose_desc">Framework UI</string>
+    <string name="lib_mlkit" translatable="false">ML Kit</string>
+    <string name="lib_mlkit_desc">Détection de code-barres</string>
+    <string name="lib_zxing" translatable="false">ZXing</string>
+    <string name="lib_zxing_desc">Rendu de code-barres</string>
+    <string name="lib_bouncy" translatable="false">Bouncy Castle</string>
+    <string name="lib_bouncy_desc">Signature de pass</string>
+    <string name="lib_pdf" translatable="false">Android PdfRenderer</string>
+    <string name="lib_pdf_desc">Extraction de texte PDF</string>
+</resources>

@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name" translatable="false">Passbook</string>
+    <string name="about">About</string>
+    <string name="version">Version 1.0</string>
+    <string name="app_description">Converts SNCF train ticket PDFs into\n.pkpass files for Walt and Apple Wallet.</string>
+    <string name="built_with">Built with</string>
+
+    <!-- Pass list -->
+    <string name="empty_state">No passes yet.\nTap + to import a train ticket PDF.</string>
+    <string name="import_pdf">Import PDF</string>
+    <string name="delete_pass">Delete pass</string>
+
+    <!-- Pass detail -->
+    <string name="ticket">Ticket</string>
+    <string name="ticket_barcode">Ticket barcode</string>
+    <string name="export_pkpass">Export .pkpass</string>
+    <string name="saved_to_downloads">Saved to Downloads</string>
+    <string name="export_failed">Export failed</string>
+    <string name="share">Share</string>
+
+    <!-- Pass fields -->
+    <string name="field_from">FROM</string>
+    <string name="field_to">TO</string>
+    <string name="field_departure">DEPARTURE</string>
+    <string name="field_arrival">ARRIVAL</string>
+    <string name="field_passenger">PASSENGER</string>
+    <string name="field_train">TRAIN</string>
+    <string name="field_date">DATE</string>
+    <string name="field_seat">SEAT</string>
+    <string name="field_ref">REF</string>
+    <string name="field_price">PRICE</string>
+
+    <!-- Libraries -->
+    <string name="lib_compose" translatable="false">Jetpack Compose</string>
+    <string name="lib_compose_desc">UI framework</string>
+    <string name="lib_mlkit" translatable="false">ML Kit</string>
+    <string name="lib_mlkit_desc">Barcode detection</string>
+    <string name="lib_zxing" translatable="false">ZXing</string>
+    <string name="lib_zxing_desc">Barcode rendering</string>
+    <string name="lib_bouncy" translatable="false">Bouncy Castle</string>
+    <string name="lib_bouncy_desc">Pass signing</string>
+    <string name="lib_pdf" translatable="false">Android PdfRenderer</string>
+    <string name="lib_pdf_desc">PDF text extraction</string>
+</resources>
