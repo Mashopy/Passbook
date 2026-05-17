@@ -61,7 +61,36 @@ object PdfParser {
         }
     }
 
-    private suspend fun scanBarcode(bitmap: Bitmap): BarcodeResult? =
+    private suspend fun scanBarcode(bitmap: Bitmap): BarcodeResult? {
+        // Try full page first
+        scanBitmap(bitmap)?.let { return it }
+
+        // Try 2×2 quadrant crops
+        val w = bitmap.width / 2
+        val h = bitmap.height / 2
+        for (row in 0..1) {
+            for (col in 0..1) {
+                val crop = Bitmap.createBitmap(bitmap, col * w, row * h, w, h)
+                scanBitmap(crop)?.also { crop.recycle(); return it }
+                crop.recycle()
+            }
+        }
+
+        // Try 3×3 grid crops
+        val w3 = bitmap.width / 3
+        val h3 = bitmap.height / 3
+        for (row in 0..2) {
+            for (col in 0..2) {
+                val crop = Bitmap.createBitmap(bitmap, col * w3, row * h3, w3, h3)
+                scanBitmap(crop)?.also { crop.recycle(); return it }
+                crop.recycle()
+            }
+        }
+
+        return null
+    }
+
+    private suspend fun scanBitmap(bitmap: Bitmap): BarcodeResult? =
         suspendCancellableCoroutine { cont ->
             val options = com.google.mlkit.vision.barcode.BarcodeScannerOptions.Builder()
                 .setBarcodeFormats(
@@ -81,7 +110,6 @@ object PdfParser {
                         val data = barcode.rawValue
                             ?: barcode.rawBytes?.toString(Charsets.ISO_8859_1)
                             ?: ""
-                        android.util.Log.d("PdfParser", "Barcode data: $data")
                         BarcodeResult(data, mlKitFormatName(barcode.format))
                     })
                 }
