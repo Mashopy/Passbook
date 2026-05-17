@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Passbook</string>
     <string name="about">About</string>
-    <string name="version">Version 1.0</string>
+    <string name="version">Version %s</string>
     <string name="app_description">Converts SNCF train ticket PDFs into\n.pkpass files for Walt and Apple Wallet.</string>
     <string name="built_with">Built with</string>
 
