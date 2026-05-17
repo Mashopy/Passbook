@@ -10,6 +10,7 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.pdf.PdfRenderer
 import android.net.Uri
+import android.util.Log
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.common.InputImage
@@ -22,12 +23,14 @@ import kotlin.coroutines.resumeWithException
 import androidx.core.graphics.createBitmap
 
 object PdfParser {
+    private const val DEBUG = false
+    private const val TAG = "PdfParser"
 
     suspend fun parse(context: Context, uri: Uri): Pass {
         val (text, bitmaps) = renderAndExtract(context, uri)
         val barcode = bitmaps.firstNotNullOfOrNull { scanBarcode(it) }
         bitmaps.forEach { it.recycle() }
-        android.util.Log.d("PdfParser", "=== EXTRACTED TEXT ===\n$text")
+        if (DEBUG) Log.d(TAG, "=== EXTRACTED TEXT ===\n$text")
         return buildPass(text, barcode)
     }
 
@@ -105,7 +108,7 @@ object PdfParser {
             BarcodeScanning.getClient(options)
                 .process(InputImage.fromBitmap(bitmap, 0))
                 .addOnSuccessListener { barcodes ->
-                    android.util.Log.d("PdfParser", "Barcodes found: ${barcodes.size} — ${barcodes.map { it.format }}")
+                    if (DEBUG) Log.d(TAG, "Barcodes found: ${barcodes.size} — ${barcodes.map { it.format }}")
                     cont.resume(barcodes.firstOrNull()?.let { barcode ->
                         val data = barcode.rawValue
                             ?: barcode.rawBytes?.toString(Charsets.ISO_8859_1)
