@@ -11,6 +11,7 @@ import android.graphics.Bitmap
 import android.graphics.Color as AColor
 import android.provider.MediaStore
 import android.os.Environment
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -29,6 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -76,6 +78,23 @@ fun PassDetailScreen(
             CircularProgressIndicator()
         }
         return
+    }
+
+    val view = LocalView.current
+
+    DisposableEffect(Unit) {
+        val window = (view.context as android.app.Activity).window
+        val originalBrightness = window.attributes.screenBrightness
+
+        window.attributes = window.attributes.also {
+            it.screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_FULL
+        }
+
+        onDispose {
+            window.attributes = window.attributes.also {
+                it.screenBrightness = originalBrightness
+            }
+        }
     }
 
     val bg = runCatching { Color(pass.backgroundColor.toColorInt()) }.getOrDefault(Color(0xFF1E1E3C))
