@@ -19,3 +19,13 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# ML Kit
+-keep class com.google.mlkit.** { *; }
+-keep class com.google.android.gms.internal.mlkit_vision_barcode.** { *; }
+-keep class com.google.firebase.components.** { *; }
+-dontwarn com.google.mlkit.**
+
+# Bouncy Castle
+-keep class org.bouncycastle.** { *; }
+-dontwarn org.bouncycastle.**
