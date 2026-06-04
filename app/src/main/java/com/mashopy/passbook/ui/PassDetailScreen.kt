@@ -73,6 +73,9 @@ fun PassDetailScreen(
     val pass = passes.firstOrNull { it.id == passId }
     val scope   = rememberCoroutineScope()
 
+    val successMessage = stringResource(R.string.saved_to_downloads)
+    val errorMessage = stringResource(R.string.export_failed)
+
     if (pass == null) {
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
@@ -115,9 +118,9 @@ fun PassDetailScreen(
                             try {
                                 val file = PkpassExporter.export(context, pass)
                                 saveToDownloads(context, file)
-                                Toast.makeText(context, context.getString(R.string.saved_to_downloads), Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, successMessage, Toast.LENGTH_SHORT).show()
                             } catch (e: Exception) {
-                                Toast.makeText(context, "${context.getString(R.string.export_failed)}: ${e.message}", Toast.LENGTH_LONG).show()
+                                Toast.makeText(context, "${errorMessage}: ${e.message}", Toast.LENGTH_LONG).show()
                             }
                         }
                     }) {
