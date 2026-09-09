@@ -10,6 +10,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.material3.Surface
+import androidx.compose.material3.MaterialTheme
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -33,24 +39,42 @@ class MainActivity : ComponentActivity() {
             PassbookTheme {
                 val navController = rememberNavController()
 
-                NavHost(navController = navController, startDestination = "list") {
-                    composable("list") {
-                        PassListScreen(
-                            viewModel   = viewModel,
-                            onPassClick = { id -> navController.navigate("detail/$id") },
-                            onAboutClick = { navController.navigate("about") },
-                        )
-                    }
-                    composable("detail/{passId}") { back ->
-                        val id = back.arguments?.getString("passId")?.toLongOrNull() ?: return@composable
-                        PassDetailScreen(
-                            passId    = id,
-                            viewModel = viewModel,
-                            onBack    = { navController.navigateUp() },
-                        )
-                    }
-                    composable("about") {
-                        AboutScreen(onBack = { navController.navigateUp() })
+                Surface(color = MaterialTheme.colorScheme.background) {
+                    NavHost(
+                        navController = navController,
+                        startDestination = "list",
+                        enterTransition = {
+                            fadeIn(tween(400)) + scaleIn(initialScale = 0.9f, animationSpec = tween(400))
+                        },
+                        exitTransition = {
+                            fadeOut(tween(400))
+                        },
+                        popEnterTransition = {
+                            fadeIn(tween(400)) + scaleIn(initialScale = 0.9f, animationSpec = tween(400))
+                        },
+                        popExitTransition = {
+                            fadeOut(tween(400))
+                        },
+                    ) {
+                        composable("list") {
+                            PassListScreen(
+                                viewModel = viewModel,
+                                onPassClick = { id -> navController.navigate("detail/$id") },
+                                onAboutClick = { navController.navigate("about") },
+                            )
+                        }
+                        composable("detail/{passId}") { back ->
+                            val id = back.arguments?.getString("passId")?.toLongOrNull()
+                                ?: return@composable
+                            PassDetailScreen(
+                                passId = id,
+                                viewModel = viewModel,
+                                onBack = { navController.navigateUp() },
+                            )
+                        }
+                        composable("about") {
+                            AboutScreen(onBack = { navController.navigateUp() })
+                        }
                     }
                 }
             }
