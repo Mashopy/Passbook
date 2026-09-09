@@ -30,14 +30,9 @@
     <string name="field_price">PRIX</string>
 
     <!-- Libraries -->
-    <string name="lib_compose" translatable="false">Jetpack Compose</string>
     <string name="lib_compose_desc">Framework UI</string>
-    <string name="lib_mlkit" translatable="false">ML Kit</string>
     <string name="lib_mlkit_desc">Détection de code-barres</string>
-    <string name="lib_zxing" translatable="false">ZXing</string>
     <string name="lib_zxing_desc">Rendu de code-barres</string>
-    <string name="lib_bouncy" translatable="false">Bouncy Castle</string>
     <string name="lib_bouncy_desc">Signature de pass</string>
-    <string name="lib_pdf" translatable="false">Android PdfRenderer</string>
     <string name="lib_pdf_desc">Extraction de texte PDF</string>
 </resources>
